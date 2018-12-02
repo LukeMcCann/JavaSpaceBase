@@ -4,8 +4,23 @@ import net.jini.core.lookup.ServiceTemplate;
 import net.jini.core.transaction.server.TransactionManager;
 import net.jini.space.JavaSpace;
 
+/*
+ * @Author - Luke McCann - The University of Huddersfield
+ *
+ * This is a breakdown of an object oriented implementation of the SpaceAccessor class
+ * showcasing how each part of the setup class works and using more robust try and catch
+ * statements which indicate issues more specifically.
+ *
+ * This file was created to gain a deeper understanding into how JavaSpaces work, SpaceUtils
+ * utilises less code than this class.
+ */
 public class SpaceAccessor
 {
+    /*
+     * getSpace - find JavaSpace on network from location hostname
+     * @param hostname - JavaSpace host
+     * @return JavaSpace - a reference to the space
+     */
     public static JavaSpace getSpace(String hostname)
     {
         setSecurity(new SecurityManager());
@@ -32,9 +47,14 @@ public class SpaceAccessor
         return space;
     }
 
-    public static JavaSpace getSpace() {return getSpace("waterloo");}
+    public static JavaSpace getSpace() { return getSpace("localhost"); }
 
 
+    /*
+     * getManager - set and return TransactionManager
+     * @param hostname
+     * @return TransactionManager
+     */
     public static TransactionManager getManager(String hostname)
     {
         setSecurity(new SecurityManager());
@@ -59,9 +79,12 @@ public class SpaceAccessor
         return tm;
     }
 
-    public static TransactionManager getManager() {return getManager("waterloo");}
+    public static TransactionManager getManager() { return getManager("localhost"); }
 
-
+    /*
+     * setSecurity - check for and set SecurityManager
+     * @param manager - the security manager to set
+     */
     public static void setSecurity(SecurityManager manager)
     {
         try
@@ -78,6 +101,11 @@ public class SpaceAccessor
         }
     }
 
+    /*
+     * unicastServiceLookup - use if host location is known
+     * @param hostname
+     * @return ServiceRegistrar - the ServiceRegistrar for the host
+     */
     public static ServiceRegistrar unicastServiceLookup(String hostname)
     {
         ServiceRegistrar sr = null;
