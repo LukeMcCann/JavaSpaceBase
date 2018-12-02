@@ -1,15 +1,16 @@
-import net.jini.core.lease.Lease;
 import net.jini.space.JavaSpace;
-import net.jini.space.JavaSpace05;
 
 /*
  * @Author LukeMcCann
  * @class SpaceDemo - use to determine whether the space is running successfully or not
+ *
+ * if you see the HelloWorld message the space is set up and ready to work with.
  */
 public class SpaceDemo
 {
     final static int THREE_SECONDS = 1000 * 3;
     final static  int FIVE_SECONDS = 1000 * 5;
+
     final static int THREE_MINUTES = THREE_SECONDS * 60;
     final static int FIVE_MINURES = FIVE_SECONDS * 60;
 
@@ -40,6 +41,7 @@ public class SpaceDemo
         try
         {
             HelloWorld result = (HelloWorld)space.take(template, null, THREE_MINUTES);
+
             if(result.msg != null)
             {
                 System.out.println(result.msg);
